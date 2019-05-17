@@ -6,84 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
-	<style>
-	body {
-		background: #222;
-		color: #eee;
-	}
-	h1 {
-		clear: both;
-	}
-	input[type=range] {
-		-webkit-appearance: slider-vertical;
-		height: 100px;
-		width: 60px;
-		margin-bottom: 2em;
-		margin-top: 3em;
-	}
-
-	input[type=range]:before {
-		content: attr(value);
-		color: #eee;
-		font-family: monospace;
-		text-align: center;
-		width: 60px;
-		display: block;
-		color: #fff;
-		position: absolute;
-		top: 2em;
-	}
-	.device {
-		clear: both;
-		padding-top: 1em;
-	}
-	.channels{
-		width: 100%;
-		display: inline-block;
-	}
-	.channel {
-		position: relative;
-		text-align: center;
-		float: left;
-	}
-	
-	.btn {
-		margin-bottom: 1em;
-
-	}
-	.Red{
-		background-color: red;
-		background-image: linear-gradient(to bottom, #7d0303, #ff0b00);
-	}
-	.Red:hover, .Red:active, .Red:focus{
-		background-color: #ff0b00;
-	}
-
-	.Yellow{
-		background-color: #fff500;
-		background-image: linear-gradient(to bottom, #918a00, #fff500);
-	}
-	.Yellow:hover, .Yellow:active, .Yellow:focus{
-		background-color: #fff500;
-	}
-
-	.Green{
-		background-color: #02b73f;
-		background-image: linear-gradient(to bottom, #02772b, #02b73f);
-	}
-	.Green:hover, .Green:active, .Green:focus{
-		background-color: #02b73f;
-	}
-
-
-	.Black{
-		background-color: #313131;
-		background-image: linear-gradient(to bottom, #000000, #313131);
-	}
-	.Black:hover, .Black:active, .Black:focus{
-		background-color: #313131;
-	}
-	</style>
+	<link href="/styles.css" rel="stylesheet" type="text/css">
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
@@ -114,7 +37,7 @@
 					});
 				}
 
-				var html = '<button class="span2 btn btn-info '+setup.presets[preset].label+'">' + setup.presets[preset].label + '</button>';
+				var html = '<button class="span2 btn btn-info '+setup.presets[preset].label.toLowerCase()+'">' + setup.presets[preset].label + '</button>';
 				var e = $(html);
 				e.hide().appendTo('#presets').fadeIn();
 				e.click(function(values) { return function() {
@@ -127,7 +50,7 @@
 			}
 			
 			/* blackout button */
-			var blackout = $('<button class="span2 btn btn-info Black">Black Out</button>');
+			var blackout = $('<button class="span2 btn btn-info black">Black Out</button>');
 			blackout.hide().appendTo('#presets').fadeIn();
 			blackout.click(function() {
 				for(var universe in setup.universes) {
@@ -164,7 +87,7 @@
 						});
 
 
-						let buttonhtml = '<button class="span2 btn btn-info '+setup.presets[preset].label+' ">' + setup.presets[preset].label + '</button>';
+						let buttonhtml = '<button class="span2 btn btn-info '+setup.presets[preset].label.toLowerCase()+' ">' + setup.presets[preset].label + '</button>';
 						var k = $(buttonhtml);
 						let idName = '#'+dev.name;
 						k.appendTo(idName);
