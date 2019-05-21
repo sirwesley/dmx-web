@@ -44,7 +44,7 @@
 		"office": {
 			"output": {
 				"driver": "enttec-usb-dmx-pro",
-				"device": "COM5",
+				"device": "/dev/ttyUSB0",
 				"_comment1": "Run the following install to get list of devices",
 				"_comment2": "npm install serialport-list"
 			},
