@@ -1,3 +1,44 @@
+/**
+  --- COLOR FUNCTIONS ---
+ */
+/**
+  Colors the buttons with a little shade.
+ */
+/* Define the Sassy Map called $buttonColors */
+/* For each key in the map, created an own class */
+.red {
+  background-color: red;
+  background-image: linear-gradient(to bottom, #990000, red); }
+  .red:hover, .red:active, .red:focus {
+    background-color: red; }
+
+.green {
+  background-color: green;
+  background-image: linear-gradient(to bottom, #001a00, green); }
+  .green:hover, .green:active, .green:focus {
+    background-color: green; }
+
+.blue {
+  background-color: blue;
+  background-image: linear-gradient(to bottom, #000099, blue); }
+  .blue:hover, .blue:active, .blue:focus {
+    background-color: blue; }
+
+.black {
+  background-color: #4c4c4c;
+  background-image: linear-gradient(to bottom, #191919, #4c4c4c); }
+  .black:hover, .black:active, .black:focus {
+    background-color: #4c4c4c; }
+
+.yellow {
+  background-color: yellow;
+  background-image: linear-gradient(to bottom, #999900, yellow); }
+  .yellow:hover, .yellow:active, .yellow:focus {
+    background-color: yellow; }
+
+/**
+  ---- GENERAL STYLING ----
+ */
 body {
   background: #222;
   color: #eee; }
@@ -38,34 +79,8 @@ input[type=range]:before {
 .btn {
   margin-bottom: 1em; }
 
-.red {
-  background-color: red;
-  background-image: linear-gradient(to bottom, #990000, red); }
-  .red:hover, .red:active, .red:focus {
-    background-color: red; }
-
-.yellow {
-  background-color: yellow;
-  background-image: linear-gradient(to bottom, #999900, yellow); }
-  .yellow:hover, .yellow:active, .yellow:focus {
-    background-color: yellow; }
-
-.green {
-  background-color: green;
-  background-image: linear-gradient(to bottom, #001a00, green); }
-  .green:hover, .green:active, .green:focus {
-    background-color: green; }
-
-.blue {
-  background-color: blue;
-  background-image: linear-gradient(to bottom, #000099, blue); }
-  .blue:hover, .blue:active, .blue:focus {
-    background-color: blue; }
-
-.black {
-  background-color: #313131;
-  background-image: linear-gradient(to bottom, #000000, #313131); }
-  .black:hover, .black:active, .black:focus {
-    background-color: #313131; }
+input.colorpicker {
+  width: 30px;
+  padding: 0; }
 
 /*# sourceMappingURL=styles.css.map */

@@ -1,9 +1,16 @@
+/**
+  --- COLOR FUNCTIONS ---
+ */
+
 $red-color: red;
 $green-color: green;
 $blue-color: blue;
 $yellow-color: yellow;
+$black-color: #4c4c4c;
 
-
+/**
+  Colors the buttons with a little shade.
+ */
 @mixin colorizeButton($property) {
   background-color: $property;
   background-image: linear-gradient(to bottom, darken($property, 20%), $property);
@@ -12,6 +19,27 @@ $yellow-color: yellow;
     background-color: $property;
   }
 }
+
+/* Define the Sassy Map called $buttonColors */
+$buttonColors: (
+        red: $red-color,
+        green: $green-color,
+        blue: $blue-color,
+        black: $black-color,
+        yellow: $yellow-color
+);
+
+/* For each key in the map, created an own class */
+@each $name, $value in $buttonColors {
+  .#{$name} {
+    @include colorizeButton( $value);
+  }
+}
+
+
+/**
+  ---- GENERAL STYLING ----
+ */
 
 body {
   background: #222;
@@ -46,7 +74,6 @@ input[type=range]:before {
 .channels{
   width: 100%;
   display: inline-block;
-
   .channel {
     position: relative;
     text-align: center;
@@ -54,35 +81,12 @@ input[type=range]:before {
   }
 }
 
-
 .btn {
   margin-bottom: 1em;
 
 }
 
-//Colored Buttons
-.red{
-  @include colorizeButton($red-color);
-}
-
-.yellow{
-  @include colorizeButton($yellow-color);
-}
-
-.green{
-  @include colorizeButton($green-color);
-}
-
-.blue{
-  @include colorizeButton($blue-color);
-}
-
-.black{
-  background-color: #313131;
-  background-image: linear-gradient(to bottom, #000000, #313131);
-
-  &:hover, &:active, &:focus {
-    background-color: #313131;
-  }
-
+input.colorpicker{
+  width: 30px;
+  padding:0;
 }

@@ -47,22 +47,7 @@
 						socket.emit('update', universe, mergedValues);
 					}
 				};}(setup.presets[preset].values));
-				console.log(html);
 			}
-			
-			/* blackout button */
-			var blackout = $('<button class="span2 btn btn-info black">Black Out</button>');
-			blackout.hide().appendTo('#presets').fadeIn();
-			blackout.click(function() {
-				for(var universe in setup.universes) {
-					var u = {};
-					for(var i = 0; i < 255; i++) {
-						u[i] = 0;
-					}
-					socket.emit('update', universe, u);
-				}
-			});
-			
 			
 			/* sliders */
 			for(var universe in setup.universes) {
@@ -122,15 +107,13 @@
 			//HTML Color Picker listener
 			$("input.colorpicker").live("change", function(e) {
 				let hexValue = e.target.value;
-
-
 				let rgb = hexToRgb(hexValue);
 
 				let target = $(e.target);
 				let address = target.data().address;
 				let universe = target.data().universe;
 
-                socket.emit('update', universe, {[address]: rgb.r, [address+1]: rgb.g, [address+2]: rgb.b});
+                socket.emit('update', universe, {[address]: rgb.r, [address+1]: rgb.g, [address+2]: rgb.b, [address+3]: 0, [address+4]: 255});
 			});
 
 
@@ -148,14 +131,10 @@
 		//Handles the Feedback of the sliders.
 		socket.on('update', function (universe, update) {
 
-			let rgbColorObj = {};
-
 			for(var k in update) {
 				$('#' + get_html_id(universe, k)).attr('value', update[k]);
 			}
-
 			updateColorPickers(universe);
-
 		});
 
 
