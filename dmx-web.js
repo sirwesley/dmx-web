@@ -119,6 +119,11 @@ function DMXWeb() {
 			}
 		});
 
+		socket.on('get_status', function(universe){
+			return DMX.devices;
+		});
+
+
 		socket.on('update', function(universe, update) {
 			dmx.update(universe, update)
 		});

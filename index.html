@@ -134,6 +134,7 @@
 			});
 
 
+			//Faders change listener
 			$(".channel>input").live("change", function(e) {
 				console.log(e);
 				var i = e.target.id.split('_');
@@ -143,12 +144,40 @@
 			});
 			socket.emit('request_refresh');
 		});
+
+		//Handles the Feedback of the sliders.
 		socket.on('update', function (universe, update) {
+
+			let rgbColorObj = {};
+
 			for(var k in update) {
 				$('#' + get_html_id(universe, k)).attr('value', update[k]);
 			}
-			
+
+			updateColorPickers(universe);
+
 		});
+
+
+		/**
+		 * Updates All the Color Pickers with the data from the existing DMX State endpoint.
+		 */
+		function updateColorPickers(universe){
+			//Request the Universe State via endpoint
+			$.ajax({
+				url: "/state/"+universe
+			}).then(function(data) {
+				let universeData = data['state'];
+				let pickers = $('input.colorpicker');
+				pickers.each(function(index, item){
+					let address = $(item).data().address;
+					let newColorObject = {r: universeData[address], g: universeData[address+1], b: universeData[address+2]};
+					let hexValue = rgbToHex(newColorObject);
+
+					$(item).attr('value', '#'+hexValue);
+				});
+			});
+		}
 
 		/**
 		 * Adds the Generic Color Picker
@@ -158,7 +187,7 @@
 		 * @returns {string}
 		 */
 		function addColorPicker(universe, address, idName ){
-			let html = '<div>Color Picker Place holder<input data-universe="'+universe+'" data-address="'+address+'" type="color" class="colorpicker" id="picker_'+idName+'" name="head"></div>';
+			let html = '<div>Color Picker: <input data-universe="'+universe+'" data-address="'+address+'" type="color" class="colorpicker" id="picker_'+idName+'" name="head"></div>';
 			return html;
 		}
 
@@ -181,6 +210,27 @@
 
 			return {r: r, g: g, b: b};
 		}
+
+		/**
+		 * Converts the HEX to RGB values
+		 * @param hex
+		 * @returns {{r: number, b: number, g: number}}
+		 */
+		var rgbToHex = function (rgb) {
+
+			let hexString = '';
+			for(color in rgb){
+				console.log(color);
+				var hex = Number(rgb[color]).toString(16);
+				if (hex.length < 2) {
+					hex = "0" + hex;
+				}
+				hexString+= hex;
+			}
+
+			return hexString;
+		};
+
 	</script>
 </head>
 <body>
