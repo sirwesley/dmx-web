@@ -8,6 +8,9 @@
 		"bin": {
 				"dmx-web": "./dmx-web.js"
 		},
+		"scripts": {
+				"start": "node dmx-web.js -c ./etc/dmx-web.json"
+		},
 		"repository": {
 				"type": "git",
 				"url": "https://github.com/wiedi/node-dmx.git"

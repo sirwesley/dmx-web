@@ -12,6 +12,7 @@
 	<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
 	<script>
+
 		function get_html_id(universe, channel) {
 			return 'channel_' + universe + '_' + channel;
 		}
@@ -93,7 +94,6 @@
 						k.appendTo(idName);
 						k.click(function(values) { return function() {
 							for(var universe in values) {
-								console.log(universe, values, values[universe], obj, {[universe]: obj});
 								socket.emit('update', universe, obj);
 							}
 						};}(setup.presets[preset].values));
@@ -109,15 +109,33 @@
 						channelshtml += '<input  id="' + html_id + '" type="range" min="0" value="0" max="255" orient="vertical">';
 						channelshtml += '</div>'
 					}
+
+
 					channelshtml += '</div>';
+					channelshtml+= addColorPicker(universe, dev.address, dev.name);
 
 					let idName = '#'+dev.name;
 					$(idName).append($(channelshtml));
 				}
-
 			}
 
-			$("input").live("change", function(e) {
+			//HTML Color Picker listener
+			$("input.colorpicker").live("change", function(e) {
+				let hexValue = e.target.value;
+
+
+				let rgb = hexToRgb(hexValue);
+
+				let target = $(e.target);
+				let address = target.data().address;
+				let universe = target.data().universe;
+
+                socket.emit('update', universe, {[address]: rgb.r, [address+1]: rgb.g, [address+2]: rgb.b});
+			});
+
+
+			$(".channel>input").live("change", function(e) {
+				console.log(e);
 				var i = e.target.id.split('_');
 				var u = {};
 				u[i[2]] = e.target.value;
@@ -131,6 +149,38 @@
 			}
 			
 		});
+
+		/**
+		 * Adds the Generic Color Picker
+		 * @param universe
+		 * @param address
+		 * @param idName
+		 * @returns {string}
+		 */
+		function addColorPicker(universe, address, idName ){
+			let html = '<div>Color Picker Place holder<input data-universe="'+universe+'" data-address="'+address+'" type="color" class="colorpicker" id="picker_'+idName+'" name="head"></div>';
+			return html;
+		}
+
+		/**
+		 * Converts the HEX to RGB values
+		 * @param hex
+		 * @returns {{r: number, b: number, g: number}}
+		 */
+		function hexToRgb(hex) {
+
+			hex=hex.replace('#', '');
+
+			console.log(hex);
+
+			var bigint = parseInt(hex, 16);
+			console.log(bigint);
+			var r = (bigint >> 16) & 255;
+			var g = (bigint >> 8) & 255;
+			var b = bigint & 255;
+
+			return {r: r, g: g, b: b};
+		}
 	</script>
 </head>
 <body>
