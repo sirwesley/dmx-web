@@ -9,7 +9,7 @@
 				"dmx-web": "./dmx-web.js"
 		},
 		"scripts": {
-				"start": "node dmx-web.js -c ./etc/dmx-web.json"
+				"start": "node dmx-web.js -c config/dmx-web.json"
 		},
 		"repository": {
 				"type": "git",

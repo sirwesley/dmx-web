@@ -1,0 +1,73 @@
+{
+	"server": {
+		"listen_port": 8080,
+		"listen_host": "",
+
+		"_uid": "www-data",
+		"_gid": "www-data",
+		"_comment1": "To drop privileges change the '_uid' and '_gid' keys to 'uid' and 'gid'.",
+		"_comment2": "On macOS uid and gid must be set in the launchd script."
+	},
+	"presets": [
+		{
+			"label": "Red",
+			"values": {
+				"office": { "1": 255, "2": 0, "3": 0, "4": 0, "5": 255, "6": 0, "7": 0,  "8": 0}
+			}
+		},
+		{
+			"label": "Yellow",
+			"values": {
+				"office": { "1": 140, "2": 140, "3": 0, "4": 140, "5": 255, "6": 0, "7": 0,  "8": 0}
+			}
+		},
+		{
+			"label": "Green",
+			"values": {
+				"office": { "1": 0, "2": 255, "3": 0, "4": 0, "5": 255, "6": 0, "7": 0,  "8": 0}
+			}
+		},
+		{
+			"label": "Blue",
+			"values": {
+				"office": { "1": 0, "2": 0, "3": 255, "4": 0, "5": 255, "6": 0, "7": 0,  "8": 0}
+			}
+		},
+		{
+			"label": "Black Out",
+			"values": {
+				"office": { "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7": 0,  "8": 0}
+			}
+		}
+	],
+	"universes": {
+		"office": {
+			"output": {
+				"driver": "enttec-usb-dmx-pro",
+				"device": "COM5",
+				"_comment1": "Run the following install to get list of devices",
+				"_comment2": "npm install serialport-list"
+			},
+			"devices": [
+				{
+					"name": "Thomas",
+					"buttons": ["Red", "Yellow","Green"],
+					"type": "adj_quad_par",
+					"address": 1
+				},
+				{
+					"name": "Sid",
+					"buttons": ["Red", "Yellow","Green"],
+					"type": "adj_quad_par",
+					"address": 16
+				},
+				{
+					"name": "Tony",
+					"buttons": ["Red", "Yellow","Green"],
+					"type": "adj_quad_par",
+					"address": 32
+				}
+			]
+		}
+	}
+}
